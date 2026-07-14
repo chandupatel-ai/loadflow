@@ -1,14 +1,15 @@
-import requests, json
+import requests
+import json
 
 BASE = "http://localhost:8000"
 
 def p(label, r):
     print(f"\n--- {label} [{r.status_code}] ---")
     try:
-        print(json.dumps(r.json(), indent=2, default=str)[:800])
+        print(json.dumps(r.json(), indent=2)[:800])
     except Exception:
+        
         print(r.text[:300])
-
 # 1. Bootstrap a broker org + admin
 r = requests.post(f"{BASE}/auth/bootstrap-org", json={
     "org_name": "Acme Brokerage", "org_type": "broker",
